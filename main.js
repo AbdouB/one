@@ -85,7 +85,7 @@ async function main(){
   grid = initGrid(window.innerWidth/rectSize, window.innerHeight/rectSize)
   
 	while (true) {
-   	await sleep()
+   	await sleep(50)
     drawGrid(window.innerWidth, window.innerHeight, "grid", grid, rectSize)
     updateGrid(grid)
    
