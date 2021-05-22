@@ -81,7 +81,7 @@ var getAdjacentAliveCount = function(grid, cellRowIndex, cellColumnIndex){
 }
 
 async function main(){
-	rectSize = 10
+	rectSize = 40
   grid = initGrid(window.innerWidth/rectSize, window.innerHeight/rectSize)
   
 	while (true) {
