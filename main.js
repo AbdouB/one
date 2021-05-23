@@ -4,7 +4,6 @@
         var ctx = canvas.getContext('2d');
         ctx.canvas.width = w;
         ctx.canvas.height = h;
-
         x = 0
         y = 0
         for (var row = 0; row < grid.length; row++) {
@@ -16,21 +15,18 @@
                 }
                 ctx.fillRect(x, y, rectSize, rectSize);
                 ctx.stroke();
-
                 x += rectSize
             }
             x = 0
             y += rectSize
         }
     };
-
-
-    var initGrid = function(w, h) {
+    var initGrid = function(w, h, threshold) {
         var grid = []
         for (var i = 0; i < h; i++) {
             grid[i] = []
             for (var j = 0; j < w; j++) {
-                if (Math.random() > 0.7) {
+                if (Math.random() > threshold) {
                     grid[i][j] = 1
                 } else {
                     grid[i][j] = 0
@@ -39,7 +35,6 @@
         }
         return grid
     }
-
     var updateGrid = function(grid) {
         copyGrid = JSON.parse(JSON.stringify(grid))
         for (var row = 0; row < copyGrid.length; row++) {
@@ -54,16 +49,13 @@
             }
         }
     }
-
     var getAdjacentAliveCount = function(grid, cellRowIndex, cellColumnIndex) {
         maxColumnIndex = grid[0].length - 1
         maxRowIndex = grid.length - 1
-
         //we start off with the top left adjacent cell
         currentCellRowIndex = cellRowIndex - 1
         currentCellColumnIndex = cellColumnIndex - 1
         count = 0
-
         for (var i = currentCellRowIndex; i < currentCellRowIndex + 3; i++) {
             if (i < 0 || i > maxRowIndex) {
                 continue
@@ -76,26 +68,19 @@
                     continue
                 }
                 count += grid[i][j]
-
             }
-
         }
-
         return count
     }
     const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
-
-
     rectSize = 8
+    threshold = 0.7
     w = window.innerWidth
     h = window.innerHeight
-    grid = initGrid(Math.floor(w / rectSize), Math.floor(h / rectSize))
-    i = 0
+    grid = initGrid(Math.floor(w / rectSize), Math.floor(h / rectSize), threshold)
     while (true) {
         await sleep(50)
         drawGrid(w, h, "grid", grid, rectSize)
         updateGrid(grid)
-        i++
     }
-
 })();
