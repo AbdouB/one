@@ -73,7 +73,7 @@
         return count
     }
     const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
-    rectSize = 8
+    rectSize = 15
     threshold = 0.7
     w = window.innerWidth
     h = window.innerHeight
